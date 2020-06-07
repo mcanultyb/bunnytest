@@ -2,7 +2,7 @@
 Technical exercise.
 
 
-I didn't have time to set up a hosting account and figure out how to deploy a container to one, which I think is what this is asking me to do.  I used the off-the-shelf image from dockerhub with rabbitMQ on a local installation of docker:
+I didn't have time to set up a hosting account and figure out how to deploy a container to one, which I think is what this is asking me to do.  I used the off-the-shelf image from dockerhub with RabbitMQ on a local installation of docker:
 
 docker pull rabbitmq
 
@@ -10,7 +10,7 @@ Then
 
 docker run -d -p5672:5672 --hostname my-rabbit --name some-rabbit2 rabbitmq:3
 
-The source code assumes a local environment with default ports / account credentials for rabbitMQ.
+The source code assumes a local environment with default ports / account credentials for RabbitMQ.
 
 The main thing that I haven't been able to do (other than deploy the container, but I think thats just a case of finding a suitable host and giving my card details then deploying the RabbitMQ image direct from DockerHub?) is gracefully signal from the publisher to the subscriber(s) that no more data is to follow, which then tells the subscriber to total eveything up and shut down. 
 
@@ -34,7 +34,7 @@ So I've gone for outputting:
 
 Output is sorted in chronological order (even though there was no requirement to do so) and I probably should have sorted the genres to make the output more consistent.
 
-I used a few libraries just to make life a bit easier.  Apache CSV as I noticed Monsters, Inc would cause issues if I did a simple split on the line text, Google's JSON parser, RabbitMQ client and some logging (requried by RabBitMQ client I think).
+I used a few libraries just to make life a bit easier.  Apache CSV as I noticed Monsters, Inc would cause issues if I did a simple split on the line text, Google's JSON parser, RabbitMQ client and some logging (requried by RabbitMQ client I think).
 
 I wasn't sure (as there was mention of microservice in the email, but not the details in the PDF) whether the expectation was to have a service running somewhere that you could hit, that sent the messages into the queue, and another which you could hit to pull the messages off the queue and process them, so I've done them as standalone Java classes.
 
