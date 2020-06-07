@@ -15,14 +15,19 @@ import com.rabbitmq.client.ConnectionFactory;
 public class WriteQueue {
 
 	static final String QUEUE_NAME = "mcanulty-test";
-	protected static final String TERMINATOR = "__DONE";
+	static final String TERMINATOR = "__DONE";
+	
 	private static final String filename = "vgsales.csv";
 	
-	public static void main(String[] args) throws Exception{
-		
+	public static void main(final String[] args) throws Exception{
+		//assume file is local
 		final File f = new File(WriteQueue.class.getResource(filename).toURI());
+		
+		//connect to RabbitMQ, assume its local, default credentials
+		
 		final ConnectionFactory factory = new ConnectionFactory();
 		factory.setHost("localhost");
+		
 		int sent = 0;
 		try (final FileReader reader = new FileReader(f);
 			 final CSVParser parser = CSVFormat.DEFAULT.withFirstRecordAsHeader().parse(reader);
@@ -39,8 +44,17 @@ public class WriteQueue {
 					sent++;
 				}
 				
-				channel.basicPublish("", QUEUE_NAME,null,TERMINATOR.getBytes()); //just to tell receiver we're done, can't close connex as that causes ack issues
+				// next bit is just to tell receiver we're done. 
+				// Tried closing the connection which seemed to cause issues with the receiver sending the ack.
+				// however as soon as this is sent, the connection will be closed anyway via autoclose, so maybe
+				// it was something else
+				// could hook into ACK being returned, if it is by RabbitMQ, and once we've had 'sent' x ACK we 
+				// could close things off, but not sure how to politely signal to the subscribers that nothing
+				// else is going to be coming their way
+				
+				channel.basicPublish("", QUEUE_NAME,null,TERMINATOR.getBytes()); 
 		}
+		
 		
 		System.out.println("Sent "+sent+" rows from file "+f.getAbsolutePath());
 	}

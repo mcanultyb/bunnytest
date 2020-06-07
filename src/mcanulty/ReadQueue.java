@@ -70,7 +70,7 @@ public final class ReadQueue {
 //				//System.out.println(s);
 //				
 //				
-//			}
+//			} // was trying to hook into this but it didn't seem to be doing what I wanted, so moved to sending a 'done' command instead just to get this working
 			
 			
 			@Override
