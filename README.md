@@ -22,8 +22,7 @@ The question wording was a little ambiguous around the totals :
 
 "outputs the total sales and number of titles per genre in each year"
 
-could mean "total sales, and in addition, the number of titles per genre"
-or "total sales AND titles/genre per year"
+could mean "total sales, and in addition, the number of titles per genre" or "total sales AND titles/genre" per year
 
 So I've gone for outputting:
 
