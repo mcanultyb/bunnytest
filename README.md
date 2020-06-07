@@ -27,9 +27,11 @@ or "total sales AND titles/genre per year"
 
 So I've gone for outputting:
 
-Sales & titles per genre per year
-Total annual sales
-Total sales for all years, all genres.
+- Sales & titles per genre per year
+
+- Total annual sales
+
+- Total sales for all years, all genres.
 
 Output is sorted in chronological order (even though there was no requirement to do so) and I probably should have sorted the genres to make the output more consistent.
 
