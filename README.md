@@ -33,5 +33,9 @@ Total sales for all years, all genres.
 
 Output is sorted in chronological order (even though there was no requirement to do so) and I probably should have sorted the genres to make the output more consistent.
 
-I used a few libraries just to make life a bit easier.  Apache CSV as I noticed Monsters, Inc would cause issues if I did a simple split on the line text, Google's JSON parser, RabbitMQ client and some logging (requried by RabitMQ client I think).
+I used a few libraries just to make life a bit easier.  Apache CSV as I noticed Monsters, Inc would cause issues if I did a simple split on the line text, Google's JSON parser, RabbitMQ client and some logging (requried by RabBitMQ client I think).
+
+I wasn't sure (as there was mention of microservice in the email, but not the details in the PDF) whether the expectation was to have a service running somewhere that you could hit, that sent the messages into the queue, and another which you could hit to pull the messages off the queue and process them, so I've done them as standalone Java classes.
+
+To send the messages, run WriteQueue, and to read them use ReadQueue.
 
